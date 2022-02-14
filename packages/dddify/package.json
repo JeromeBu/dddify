@@ -1,0 +1,16 @@
+{
+  "name": "dddify",
+  "type": "module",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "rm -rf ./dist && tsc"
+  },
+  "devDependencies": {
+    "tsconfig": "workspace:*",
+    "config": "workspace:*",
+    "typescript": "^4.5.3"
+  }
+}
