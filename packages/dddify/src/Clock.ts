@@ -20,6 +20,6 @@ export class CustomClock implements Clock {
   };
 }
 
-export class RealClock implements Clock {
+export class ActualClock implements Clock {
   public now = () => new Date();
 }
