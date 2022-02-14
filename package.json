@@ -7,7 +7,9 @@
     "packages/*"
   ],
   "scripts": {
+    "fullcheck": "turbo run lint build test",
     "build": "turbo run build",
+    "test": "turbo run test",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
