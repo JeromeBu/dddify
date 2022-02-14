@@ -1,2 +1,2 @@
-export { someFunction } from "./src/someFunction";
-export type { SomeType } from "./src/someFunction";
+export { CustomClock, RealClock } from "./src/Clock";
+export type { Clock } from "./src/Clock";
