@@ -1,28 +1,30 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuidV4 } from "uuid";
+import { createCustomValues } from "./createCustomValues";
+
+type Uuid = string;
 
 export interface UuidGenerator {
-  new: () => string;
+  new: () => Uuid;
 }
 
-export class CustomUuidGenerator implements UuidGenerator {
-  private _nextUuids: string[] = [];
-
-  constructor(private defaultUuid: string = "default-generated-uuid") {}
-
-  new = () => {
-    return this._nextUuids.shift() ?? this.defaultUuid;
-  };
-
-  // for test purpose
-  setNextUuid = (uuid: string) => {
-    this._nextUuids = [uuid];
-  };
-
-  setNextUuids = (uuids: string[]) => {
-    this._nextUuids = uuids;
-  };
+interface CustomUuidGenerator extends UuidGenerator {
+  setNextUuid: (uuid: Uuid) => void;
+  setNextUuids: (uuids: Uuid[]) => void;
 }
 
-export class ActualUuidGenerator implements UuidGenerator {
-  new = () => uuid();
-}
+export const createCustomUuidGenerator = (
+  defaultUuid: Uuid = "default-generated-uuid"
+): CustomUuidGenerator => {
+  const { newValue, setNextValues, setNextValue } =
+    createCustomValues(defaultUuid);
+
+  return {
+    new: newValue,
+    setNextUuid: setNextValue,
+    setNextUuids: setNextValues,
+  };
+};
+
+export const createActualUuidGenerator = (): UuidGenerator => ({
+  new: uuidV4,
+});

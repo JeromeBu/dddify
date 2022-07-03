@@ -1,10 +1,10 @@
-import { CustomUuidGenerator } from "./UuidGenerator";
+import { createCustomUuidGenerator } from "./UuidGenerator";
 
 const libDefaultUuid = "default-generated-uuid";
 
 describe("CustomUuidGenerator", () => {
   it("can set the next uuid, than fallback to default", () => {
-    const uuidGenerator = new CustomUuidGenerator();
+    const uuidGenerator = createCustomUuidGenerator();
 
     const nextUuid = "uuid-1";
     uuidGenerator.setNextUuid(nextUuid);
@@ -14,7 +14,7 @@ describe("CustomUuidGenerator", () => {
   });
 
   it("can set the next n uuid, than fallback to default", () => {
-    const uuidGenerator = new CustomUuidGenerator();
+    const uuidGenerator = createCustomUuidGenerator();
 
     const uuid1 = "uuid-1";
     const uuid2 = "uuid-2";
@@ -28,13 +28,13 @@ describe("CustomUuidGenerator", () => {
   });
 
   it("has deterministic default value", () => {
-    const uuidGenerator = new CustomUuidGenerator();
+    const uuidGenerator = createCustomUuidGenerator();
     expect(uuidGenerator.new()).toEqual(libDefaultUuid);
   });
 
   it("has configurable default value", () => {
     const newDefaultUuid = "my-custom-uuid";
-    const uuidGenerator = new CustomUuidGenerator(newDefaultUuid);
+    const uuidGenerator = createCustomUuidGenerator(newDefaultUuid);
     expect(uuidGenerator.new()).toEqual(newDefaultUuid);
   });
 });

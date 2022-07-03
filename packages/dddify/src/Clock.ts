@@ -1,25 +1,27 @@
+import { createCustomValues } from "./createCustomValues";
+
 export interface Clock {
-  now(): Date;
+  now: () => Date;
 }
 
-export class CustomClock implements Clock {
-  constructor(
-    private _defaultDate: Date = new Date("2022-01-01T12:00:00.000Z")
-  ) {}
+interface CustomClock extends Clock {
+  setNextDate: (date: Date) => void;
+  setNextDates: (dates: Date[]) => void;
+}
 
-  private _nextDates: Date[] = [];
+export const createCustomClock = (
+  defaultDate: Date = new Date("2022-01-01T12:00:00.000Z")
+): CustomClock => {
+  const { newValue, setNextValues, setNextValue } =
+    createCustomValues(defaultDate);
 
-  public now = () => this._nextDates.shift() ?? this._defaultDate;
-
-  // for test purpose :
-  setNextDate = (date: Date) => {
-    this._nextDates = [date];
+  return {
+    now: newValue,
+    setNextDates: setNextValues,
+    setNextDate: setNextValue,
   };
-  setNextDates = (dates: Date[]) => {
-    this._nextDates = dates;
-  };
-}
+};
 
-export class ActualClock implements Clock {
-  public now = () => new Date();
-}
+export const createActualClock = (): Clock => ({
+  now: () => new Date(),
+});

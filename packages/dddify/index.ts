@@ -1,5 +1,10 @@
-export { CustomClock, ActualClock } from "./src/Clock";
+export { createCustomClock, createActualClock } from "./src/Clock";
 export type { Clock } from "./src/Clock";
 
-export { CustomUuidGenerator, ActualUuidGenerator } from "./src/UuidGenerator";
+export {
+  createCustomUuidGenerator,
+  createActualUuidGenerator,
+} from "./src/UuidGenerator";
 export type { UuidGenerator } from "./src/UuidGenerator";
+
+export type { Flavor } from "./src/Flavor";
