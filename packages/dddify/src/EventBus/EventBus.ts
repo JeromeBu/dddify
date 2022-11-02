@@ -9,6 +9,6 @@ export interface EventBus<Event extends GenericEvent<string, unknown>> {
   publish: (event: Event) => Promise<void>;
   subscribe: <Topic extends Event["topic"]>(
     topic: Topic,
-    callBack: (e: Extract<Event, { topic: Topic }>) => Promise<void>
+    callBack: (event: Extract<Event, { topic: Topic }>) => Promise<void>
   ) => void;
 }
