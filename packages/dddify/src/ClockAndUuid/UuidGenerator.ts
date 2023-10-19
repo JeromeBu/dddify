@@ -1,4 +1,3 @@
-import { v4 as uuidV4 } from "uuid";
 import { createCustomValues } from "./createCustomValues";
 
 type Uuid = string;
@@ -26,5 +25,5 @@ export const createCustomUuidGenerator = (
 };
 
 export const createActualUuidGenerator = (): UuidGenerator => ({
-  new: uuidV4,
+  new: () => crypto.randomUUID(),
 });

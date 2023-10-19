@@ -2,7 +2,7 @@ import { EventBus, GenericEvent } from "./EventBus";
 
 // prettier-ignore
 export const createInMemoryEventBus = <Event extends GenericEvent<string, unknown>>(): EventBus<Event> => {
-  const _subscriptions: Partial<Record<
+  const subscriptions: Partial<Record<
     Event["topic"],
     ((event: Event) => Promise<void>)[]
     >> = {};
@@ -12,7 +12,7 @@ export const createInMemoryEventBus = <Event extends GenericEvent<string, unknow
     publish: async (event: Event) => {
       const topic: Event["topic"] = event.topic;
 
-      const callbacks = _subscriptions[topic];
+      const callbacks = subscriptions[topic];
       if (callbacks === undefined) {
         console.warn(
           { eventTopic: event.topic },
@@ -32,12 +32,12 @@ export const createInMemoryEventBus = <Event extends GenericEvent<string, unknow
       topic: Topic,
       callback: (event: Extract<Event, { topic: Topic }>) => Promise<void>
     ): void => {
-      if (!_subscriptions[topic]) {
-        _subscriptions[topic] = [];
+      if (!subscriptions[topic]) {
+        subscriptions[topic] = [];
       }
 
       if (callback) {
-        _subscriptions[topic]!.push(callback as any);
+        subscriptions[topic]!.push(callback as any);
       }
     },
   };

@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "build": "rm -rf ./dist && tsc",
     "publish": "npm publish"
   },
@@ -14,8 +14,5 @@
     "config": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.3"
-  },
-  "dependencies": {
-    "uuid": "^8.3.2"
   }
 }
